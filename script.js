@@ -1,7 +1,4 @@
 
-// Quiz object. 
-    // Vars: questions, choices, answers, timeLeft, quiz progess (isQuizInProgress).
-    // Methods: score calculator, timer.
 const quiz = {
     questions: [
         {
@@ -98,13 +95,45 @@ const displayFinalMsgForm = function() {
         );
 }
 
-// Displays high scores with clear highscores button and go back (restart) button
+// Displays high scores 
+// TODO clear highscores button and go back (restart) button
+const displayHighScores = function() {
+    let highScores = localStorage.getItem("highScores");
+    highScores = JSON.parse(highScores);
 
+    mainEl.append(`<h2>High Scores</h2>`);
 
-// Handler for initials form.
-const initialsFormHandler = function(event) {
-    // store intials in localstorage
-    // display highscores
+    let scoresListEl = $('<ol>'); 
+
+    // loop through high scores and render to display
+    for (var i = 0; i < highScores.length; i++) {
+        scoresListEl.append(`<li>${highScores[i].initials} ${highScores[i].score}</li>`);
+    }
+
+    mainEl.append(scoresListEl);
+}
+
+// Updates initials and score from localstorage
+const initialsFormSubmitHandler = function(event) {
+    event.preventDefault();
+    const initialsInput = $('#initials');
+    let highScores = localStorage.getItem("highScores");
+    highScores = JSON.parse(highScores);
+
+    let highScore = {
+        initials: initialsInput.val(),
+        score: quiz.score
+    }
+
+    highScores.push(highScore);
+    
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+
+    // clears main el
+    mainEl.html(' ')
+
+    displayHighScores();
+
 }
 
 // Start quiz button event listener
@@ -113,15 +142,14 @@ $('#btn-start').on('click', function() {
     // clears main el
     mainEl.html('');
     displayQuestion(quiz);
-    //handleChoiceClicks();
 });
 
-// An event listener to start the timer.
+// TODO An event listener to start the timer.
 
-// Evaluates the user choice clicks, updates score/timer and displays the next question.
-const handleChoiceClicks = function() {
+// Evaluates the user's answer choice, updates the score/timer, and checks if there are any more questions.
+// If the quiz is over, it displays the final message form.
+const handleChoiceClicks = function(event) {
     
-    $('#choices').on('click', '.choice-btn', function(event) {
     // Evaluate answer and update score
     let choice = $(event.target).text();
     
@@ -146,10 +174,8 @@ const handleChoiceClicks = function() {
     } else {
         displayQuestion(quiz);
     }
-    });
 }
 
-$('body').on('click', handleChoiceClicks);
-$('body').on('click', )
 
-// Save initials and score to localstorage.
+mainEl.on('click', '.choice-btn', handleChoiceClicks);
+mainEl.on('submit', '#initials-form', initialsFormSubmitHandler);
