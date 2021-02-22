@@ -2,8 +2,11 @@
     text-align: right;
 }
 
-#main-content {
-    border: 2px solid red;
+#main-container {
+    margin-top: 15%;
+}
+
+#instructions {
     padding-left: 25%;
     padding-right: 25%;
 }
