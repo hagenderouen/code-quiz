@@ -59,7 +59,7 @@ const displayWelcomeMsg = function() {
                 the time limit. Keep in mind that incorrect answers will penalize
                 score/time by ten seconds!
             </p>
-            <button id="btn-start">Start Quiz</button>
+            <button id="btn-start" class="btn btn-primary btn-purple">Start Quiz</button>
         </div>`);
 }
 
@@ -84,7 +84,7 @@ const displayQuestion = function(quiz) {
     // loop through choices and append items to the list
     for (var i = 0; i < question.choices.length; i++) {
         let choice = question.choices[i];
-        listEl.append(`<li><button class="choice-btn">${choice}</button></li>`);
+        listEl.append(`<li><button class="choice-btn btn-purple">${choice}</button></li>`);
     }
     // append list to mainEl
     mainEl.append(listEl);
@@ -98,7 +98,7 @@ const displayFinalMsgForm = function() {
         <form id="initials-form">
             <label for="initials">Your initials:</label>
             <input type="text" id="initials" name="initials">
-            <input type="submit" value="Submit">
+            <input class="btn btn-primary btn-purple" type="submit" value="Submit">
         </form>`
         );
 }
@@ -125,7 +125,10 @@ const displayHighScores = function() {
 
     mainEl.append(scoresListEl);
 
-    mainEl.append('<div><button id="go-back">Go Back</button><button id="clear-highscores">Clear Highscores</button></div>');
+    mainEl.append(`<div>
+        <button id="go-back" class="btn btn-primary btn-purple">Go Back</button>
+        <button id="clear-highscores" class="btn btn-primary btn-purple">Clear Highscores</button></div>
+        `);
 }
 
 const handleGoBack = function() {
@@ -231,7 +234,6 @@ const handleChoiceClicks = function(event) {
     }
 }
 
-// TODO Display answer prompt
 const displayAnswerResponse = function(answer) {
     answerResponseEl.append(`<hr><p><i>${answer}</i></p>`);
     

@@ -2,6 +2,11 @@
     text-align: right;
 }
 
+#view-highscores {
+    background-color: inherit;
+    color: #800080;
+}
+
 #main-container {
     margin-top: 15%;
 }
@@ -9,4 +14,21 @@
 #instructions {
     padding-left: 25%;
     padding-right: 25%;
+}
+
+.choice-btn {
+    margin-top: 0.5rem;
+    border: 0;
+    border-radius: 10px;
+    background-color:#800080;
+    color: white;
+}
+
+.btn-purple {
+    background-color: #800080;
+    border: 0;
+}
+
+.btn-purple:hover {
+    background-color: #520152;
 }
